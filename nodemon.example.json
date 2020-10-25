@@ -1,0 +1,5 @@
+{
+  "env": {
+    "MONGO_URI": "Replace with your Mongo connection String"
+  }
+}
