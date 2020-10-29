@@ -12,6 +12,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Apply Common Middlewares
+// to enable app to read from json files such resp
 app.use(express.json());
 
 // Apply Router as Middleware
