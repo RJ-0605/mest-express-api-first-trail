@@ -42,20 +42,54 @@ exports.getBooksForAuthor = async(req, res) => {
   // res.send('Here are all the Books for the Author');
 }
 
+
+
+
+
 // Create New Author
 exports.createNewAuthor = async(req, res) => {
+  let response = {}
   try {
     // Create New Book
     const author = await AuthorModel.create(req.body);
     // Return Book As Response
-    res.status(201).json(author);
+    res.status(201)
+    console.log(author)
+    response = (author)
+    // res.status(201).json(author);
   } catch (error) {
-    res.status(500).send(error.message);
+    res.status(500);
+    response.response = error.message;
+    // res.status(500).send(error.message);
   }
-  res.send('You Just Created a New Author');
+  res.send(response);
+  // res.send('You Just Created a New Author');
 }
 
+
 // Delete A Author
-exports.deleteAuthorById = (req, res) => {
-  res.send('You just deleted A Single Author');
+exports.deleteAuthorById = async (req, res) => {
+
+    try {
+	// specify the authorId 
+	
+	const authorId = req.params.authorId;
+	
+	//delete the authorId
+	const delauthor = await AuthorModel.findByIdAndDelete(authorId);
+	res.status(202)
+	console.log(delauthor)
+	response = (delauthor)
+	
+	} catch (error) {
+	res.status(400);
+	response.response = error.message;
+	}
+	
+
+  	res.send(response);
 }
+
+
+
+
