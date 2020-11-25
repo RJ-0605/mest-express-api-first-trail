@@ -7,8 +7,14 @@ const controller = require('../controllers/pythoncontrollers');
 // Instantiate Router
 const router = Router();
 
+
+// post to react 
+// get all from here this path 
+router.get('/pythonapiget', controller.getAllStudents);
+
 // Get All you can access it from /pythonapiget
 router.get('/pythonapiget', controller.getAllStudents);
+
 
 
 
