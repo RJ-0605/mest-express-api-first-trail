@@ -93,6 +93,10 @@ const data = []
 	const myjson = optimizedpython_courses["course_ids"]
 	console.log("MY JsoN fir optimised courses " , myjson )
 	console.log("MY JsoN fir optimised courses " , optimizedpython_courses["course_ids"] )
+	
+	//use these defualt values if the myjson was not set ,
+	// so in  pre_data([2,1,1], data_source) the array[2,1,1] will fill myjson and myjson 
+	// will acts as an argument so the function will run 
 	 pre_data([2,1,1], data_source)
 	function pre_data( myjson ,data_source){
 	
