@@ -274,16 +274,16 @@ const options = [
   <div className="form-row">
     <div className="form-group col-md-4">
       <label for="gender">Gender</label>
-      <input type="text" className="form-control" id="gender" placeholder="Gender" name={gender}   value= {gender}  onChange={handleGenderChange} />
+      <input type="text" className="form-control" id="gender" placeholder="male or female " name={gender}   value= {gender}  onChange={handleGenderChange} />
       
     </div>
     <div className="form-group col-md-4">
       <label for="race">Race</label>
-      <input type="text" className="form-control" id="race" placeholder="Race" name={race}   value= {race}  onChange={handleRaceChange} />
+      <input type="text" className="form-control" id="race" placeholder="white or black " name={race}   value= {race}  onChange={handleRaceChange} />
     </div>
      <div className="form-group col-md-4">
       <label for="edulevel">Level of Education</label>
-      <input type="text" className="form-control" id="edulevel" placeholder="Level of Education" name={edulevel}   value= {edulevel}  onChange={handleEdulevelChange} />
+      <input type="text" className="form-control" id="edulevel" placeholder="bachelor's degree or master's degree " name={edulevel}   value= {edulevel}  onChange={handleEdulevelChange} />
     </div>
   </div>
   
@@ -291,18 +291,18 @@ const options = [
   <div className="form-row">
     <div className="form-group col-md-6">
       <label for="Account Type ">Account Type</label>
-      <input type="text" className="form-control" id="accountType" placeholder="Account Type" name={accountType}   value= {accountType}  onChange={handleAccountTypeChange} />
+      <input type="text" className="form-control" id="accountType" placeholder="free or paid" name={accountType}   value= {accountType}  onChange={handleAccountTypeChange} />
     </div>
     <div className="form-group col-md-6">
-      <label for="courseone">Course One</label>
-      <input type="text" className="form-control" id="courseone" placeholder="First Choice" name={courseone}   value= {courseone}  onChange={handleCourseOneChange} />
+      <label for="courseone"> Role</label>
+      <input type="text" className="form-control" id="courseone" placeholder="Teacher or Student " name={courseone}   value= {courseone}  onChange={handleCourseOneChange} />
     </div>
      
   </div>
   
   <div class="form-row">
   
-    <div className="form-group col-md-6">
+  {/*  <div className="form-group col-md-6">
       <label for="coursetwo">Course two </label>
       <input type="text" className="form-control" id="coursetwo" placeholder="Second Choice" name={coursetwo}   value= {coursetwo}  onChange={handleCoursetwoChange} />
     </div>
@@ -310,7 +310,7 @@ const options = [
     <div className="form-group col-md-6">
       <label for="coursethree">Course three</label>
       <input type="text" className="form-control" id="coursethree" placeholder="Third Choice" name={coursethree}   value= {coursethree}  onChange={handleCoursethreeChange} />
-    </div>
+    </div> */}
      
   </div>
   

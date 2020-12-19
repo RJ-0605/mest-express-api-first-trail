@@ -14,26 +14,21 @@ const router = Router();
 const fetch = require("node-fetch");
 
 
-//     definite data structure to be shared and definite constants can be defined here.
-
-//        i  can get from database at the beginning for neutral storage 
-//       and share among teachers and students and 
-//       update in their various dashboards since const allows for that.
 
 
-const data_source = [ 
+
+const data_source = { 
 							
-							[2 , { "id":2, subject:"English",
-    								"rating":"3.5", "people" :45 , "status":"not added"} ] ,
+							2: { "id":2, subject:"English",
+    								"rating":"3.5", "people" :45 , "status":"not added"},
     						
-    						[3 ,  {"id":3, subject :"Chemistry",
-    						"rating":"2.5", "people" :36 , "status":"added"}  ],
+    						3 : {"id":3, subject :"Chemistry",
+    						"rating":"2.5", "people" :36 , "status":"added"},
     						
-    						[1 , { "id":1 , subject :"Biology",
-    						"rating":"1.5", "people" :15 , "status":"not added"}  ]
+    						1 : { "id":1 , subject :"Biology",
+    						"rating":"1.5", "people" :15 , "status":"not added"}
     						
-    						]
-
+    						}
 
 
 
@@ -62,31 +57,9 @@ const numberteachertracker = [{updateteachnumb:""}]
 const optimizedpython_courses	= {"course_ids":""}
 
 
-const data = []
+let data = []
 
-  // const data = [ { "id":32, subject:"English",
-    //						"rating":"3.5", "people" :45 , "status":"not added"}  ,
-    						
-    						
-    						
-   	//			  { "id":33, subject :"Chemistry",
-   	//					"rating":"2.5", "people" :36 , "status":"added"}  ,
-    				
-   	//			{ "id":34 , subject :"Biology",
-  		//				"rating":"1.5", "people" :15 , "status":"not added"}
-    						 		 
-   	//			   ]
-   				   
-   				   
-	//	myjson= [2,1,1]
-
-
-
-
-	
-	
-	
-	// console.log("MY DATA_SOURCE" , data_source[0])
+ 
 
    
 	
@@ -97,55 +70,47 @@ const data = []
 	//use these defualt values if the myjson was not set ,
 	// so in  pre_data([2,1,1], data_source) the array[2,1,1] will fill myjson and myjson 
 	// will acts as an argument so the function will run 
-	 pre_data([2,1,1], data_source)
+	
+	
+	// main test starts here 
+	 //   pre_data(sortAndFilter([2,1,1]), data_source)
+	 
+	function sortAndFilter ( jsondata ) {
+		     	
+			// filter the returned data from python
+			let sorteddatacopy = [...jsondata].sort(); 
+			console.log("this is the sorted")
+			return sorteddatacopy.filter( (num, index) => num !== sorteddatacopy[index-1] );
+	         
+	         }
+	 
+	 
 	function pre_data( myjson ,data_source){
 	
 		
-		// console.log("MY JSON" , myjson)
-	//	console.log("MY DATA_SOURCE" , data_source[0])
+		console.log("FRANK CHeck PREDATA is working    " , myjson  )
 		
 		count = 0
 		
-		for (var x = 0; x< data_source.length; x++ ){
-				
-				var data_id = data_source[x][0]
-			//	console.log("first data " , data_id)
-			//	console.log(myjson)
-				for (var y =0 ; y< myjson.length ; y++ ){
-						console.log(y)
-							if( data_id === y ){
-							
-									data.push(data_source[x][1])
-						//	console.log("MY JSON" , y )
-							console.log("MY DATA_SOURCE" , data_id)
-				                                 }
-				 }
-				
+		   
+			data = myjson.map(id => data_source[id]);
 			
-					
-			
-		}
+				
+				
+		        
 	
 	
 		console.log("This is data" )
 		console.log(data)
 	
-	
-			
-	
-			
-	
-	
-			}
-	
-	
-	
-	
-	
-	
-	
-	
 
+			console.log("FRANK CHeck PREDATA is DONE   " , data  )
+	
+	
+			  }
+	
+	
+	
 
 
 
@@ -206,6 +171,8 @@ router.all('/', (req, res) => {
 //but can be used for anyhting i can specify whether signup or not with sofware 
 
 
+
+
 router.post('/api/signup', async (req,res) => {
 
 
@@ -263,27 +230,17 @@ router.post('/api/signup', async (req,res) => {
 		     
 		     newmsg = "data is sent"
 		     
-		     // getting response from python 
-		     console.log("this is message from postrequest")
-		     console.log("      ")
-		     console.log("      ")
-		    
-		     
-		     
-		     // now i gotto to give these indices of course ids to react or maybe backup 
-		     // them up in mongodb as well
+ 
 		     console.log(msgjson)
-		     
-		   //  const newdata = pre_data(msgjson, data_source)
-		     
-		   //  console.log("this is new data " ,newdata)
+
 		     console.log(data)
-		     optimizedpython_courses["course_ids"] = msgjson
 		     
-		     console.log("USE OF DICTIONARIES")
-		     console.log(optimizedpython_courses["course_ids"])
+		  //   optimizedpython_courses["course_ids"] = sortAndFilter(msgjson);
 		     
-		     pre_data(myjson, data_source)
+		 
+		     
+		     pre_data(sortAndFilter(msgjson), data_source)
+		     
 		     
 		     res.json(response)
 		     
@@ -351,12 +308,7 @@ router.get('/api/getList', (req,res) => {
     
     
     
- //   i will share number of courses and courses format for this user
- //    and in the post i will take out his changes in the post to the number of courses 
- //    and update the original one just for the number of courses and pass it to the teacher 
-    
-    
-  //  first pick info from python result which i myjsin and append and sen here 
+ 
   
     //pre_data(myjson, data_source)
     
@@ -404,33 +356,28 @@ router.post('/api/postfromstudashboard',async (req, res) => {
 
 // An api endpoint that returns a short list of items
 router.get('/api/getListteach', (req,res) => {
-    var list = { item : { "firstitem" : "item1", "seconditem":"item2", "third" :"item3"}
+   
+   
     
     
+ 
     
+    var teachlist = {
     
-     };
-    
-    
-    
- //   i will share number of courses and courses format for this user
- //    and in the post i will take out his changes in the post to the number of courses 
- //    and update the original one just for the number of courses and pass it to the teacher 
-    
-    var teachlist = { data : [ { "id":32, subject:"English",
-    						"rating":"3.5", "people" :45 , "status":"not added"}  ,
-    						
-    						
-    						
-    				  { "id":33, subject :"Chemistry",
-    						"rating":"2.5", "people" :35 , "status":"added"}  ,
-    				
-    				{ "id":34 , subject :"Biology",
-    						"rating":"1.5", "people" :15 , "status":"not added"}
-    						
-    		 
-    		 
-    				   ] ,
+								data : [ { "id":32, subject:"English",
+					 						"rating":"3.5", "people" :45 , "status":"not added"}  ,
+					 						
+					 						
+					 						
+					 				  { "id":33, subject :"Chemistry",
+					 						"rating":"2.5", "people" :35 , "status":"added"}  ,
+					 				
+					 				{ "id":34 , subject :"Biology",
+					 						"rating":"1.5", "people" :15 , "status":"not added"}
+					 						
+					 		 
+					 		 
+					 				   ]    ,
               
                  numberteach : teachersforcourse
     				   		
@@ -438,14 +385,12 @@ router.get('/api/getListteach', (req,res) => {
     				    }
     						 
     						 
-    				 
-    						 
-    
-    
+
     
     res.json(teachlist);
     console.log(teachlist)
     console.log('Sent list of items');
+    
 });
 
 
